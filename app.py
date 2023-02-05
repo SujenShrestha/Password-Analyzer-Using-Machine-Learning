@@ -1,37 +1,46 @@
 import streamlit as st
 
-#Machine Learning Package
-import joblib
-
 #Libraries to generate random password
 import random
 import string
-import os
 
-
-import requests
-import hashlib
-from PIL import Image
+import numpy as np
+import pickle
 from check_pass import *
 
 def gen_password(size):
-    characters = string.difits = string.ascii_letters + string.punctuation
+    characters = string.digits + string.ascii_letters + string.punctuation
     generated_password = "".join(random.choice(characters) for x in range(size))
     return generated_password
 
-def load_model(model_file):
-    loaded_model = joblib.load(open(os.path.join(model_file),"rb"))
-    return loaded_model
+def word_to_char(word):
+    return list(word)
 
-password_vectorizer = open("pswd_cv.pkl","rb")
-pswd_cv = joblib.load(password_vectorizer)
+def load_vectorizer():
+    #Loading vectorizer from pickle file
+    file = open("tfidf_password_strength.pickle",'rb')
+    saved_vectorizer = pickle.load(file)
+    file.close()
+    return saved_vectorizer
 
-def get_key(val,my_dict):
-    for key,value in my_dict.items():
-        if val == value:
-            return key
+def load_model():
+    #Loading model from pickle file
+    file = open("final_model.pickle",'rb')
+    final_model = pickle.load(file)
+    file.close()
+    return final_model
 
-password_labels = {"Weak":0,"Medium":1,"Strong":2}
+def password_strength_check(input,vectorizer,model):
+    X_password=np.array([input])
+    X_predict=vectorizer.transform(X_password)
+    y_pred=model.predict(X_predict)
+    strengh=y_pred[0]
+    if strengh==0:
+        return 'Weak Password'
+    if strengh==1:
+        return 'Medium Password'
+    if strengh==2:
+        return 'Strong Password'
 
 def api(pwned):
 	count = api_check(pwned)
@@ -55,13 +64,9 @@ def main():
         st.subheader("Test Your Password Strength")
         password = st.text_input("Enter Password",type="password")
         if st.button("Check"):
-
-            vect_password = pswd_cv.transform([password]).toarray()
-            predictor = load_model("nv_pswd_model.pkl")
-            prediction = predictor.predict(vect_password)
-
-            result = get_key(prediction,password_labels)
-            st.info(result)
+            vectorizer=load_vectorizer()
+            model=load_model()
+            st.write(password_strength_check(password,vectorizer,model))
 
             api(password)
 
