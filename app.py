@@ -22,7 +22,6 @@ def load_vectorizer():
     saved_vectorizer = pickle.load(file)
     file.close()
     return saved_vectorizer
-
 def load_model():
     #Loading model from pickle file
     file = open("final_model.pickle",'rb')
