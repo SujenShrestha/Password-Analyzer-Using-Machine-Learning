@@ -22,6 +22,7 @@ def load_vectorizer():
     saved_vectorizer = pickle.load(file)
     file.close()
     return saved_vectorizer
+
 def load_model():
     #Loading model from pickle file
     file = open("final_model.pickle",'rb')
@@ -37,7 +38,7 @@ def password_strength_check(input,vectorizer,model):
     if strengh==0:
         return 'Weak Password'
     if strengh==1:
-        return 'Medium Password'
+        return 'Average Password'
     if strengh==2:
         return 'Strong Password'
 
@@ -53,13 +54,12 @@ def api(pwned):
 
 def main():
     """Password Analyzer"""
-    st.title("Password Strength Analyzer")
-    #st.subheader("Final Year Project")
-
-    activities = ["Check Password Strength","Password Generator"]
+    activities = ["Check Password Strength","Password Generator", "Password Compliance"]
+    
     choice = st.sidebar.selectbox("Select Activity",activities)
 
     if choice == "Check Password Strength":
+        st.title("Password Strength Analyzer")
         st.subheader("Test Your Password Strength")
         password = st.text_input("Enter Password",type="password")
         if st.button("Check"):
@@ -76,6 +76,17 @@ def main():
         if st.button("Generate"):
             custom_password = gen_password(number)
             st.write(custom_password)
+
+    elif choice == "Password Compliance":
+        st.subheader("NIST Password Guidelines")
+        filename = "NIST.txt"
+        with open(filename, "r") as file:
+            i = 1
+            for line in file:
+                line = line.strip()
+                if line:
+                    st.write(f"{i}. {line}")
+                    i += 1
         
 if __name__ == '__main__':
     main()
