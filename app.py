@@ -54,7 +54,7 @@ def api(pwned):
 
 def main():
     """Password Analyzer"""
-    activities = ["Check Password Strength","Password Generator", "Password Compliance"]
+    activities = ["Check Password Strength","Password Generator", "Password Guidelines"]
     
     choice = st.sidebar.selectbox("Select Activity",activities)
 
