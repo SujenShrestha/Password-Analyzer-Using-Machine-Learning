@@ -78,7 +78,7 @@ def main():
             st.write(custom_password)
 
     elif choice == "Password Guidelines":
-        st.subheader("NIST Password Compliance")
+        st.subheader("NIST Password Policy")
         filename = "NIST.txt"
         with open(filename, "r") as file:
             i = 1
