@@ -1,0 +1,23 @@
+Passwords chosen by subscribers must be at least 8 characters in length, and passwords chosen by the CSP or password verifier must be at least 6 characters in length.
+
+Password verifiers should accept ASCII and Unicode characters, and the use of spaces is also acceptable.
+
+If Unicode characters are accepted in passwords, the password verifier should apply a normalization process using either NFKC or NFKD.
+
+Passwords that are randomly chosen by the CSP or password verifier must be generated using an approved random bit generator and must be at least 6 characters in length.
+
+Password verifiers should not allow subscribers to store hints and should not prompt them to use specific types of information when choosing passwords.
+
+Password verifiers must compare prospective passwords against a list of commonly used, expected, or compromised values and reject passwords that are found in the list.
+
+Password verifiers should offer guidance to subscribers, such as a password-strength meter, to help them choose strong passwords.
+
+Password verifiers must implement a rate-limiting mechanism to limit the number of failed authentication attempts.
+
+Password verifiers should not impose other composition rules for passwords and should not require arbitrary changes of passwords.
+
+Password verifiers should permit claimants to use "paste" functionality when entering a password to facilitate the use of password managers.
+
+Password verifiers should offer options to display the password until it is entered and should also use approved encryption and an authenticated protected channel when requesting passwords.
+
+Passwords must be stored in a form that is resistant to offline attacks and must be salted and hashed using a suitable one-way key derivation function.
