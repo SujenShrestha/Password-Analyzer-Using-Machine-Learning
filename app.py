@@ -36,11 +36,11 @@ def password_strength_check(input,vectorizer,model):
     y_pred=model.predict(X_predict)
     strengh=y_pred[0]
     if strengh==0:
-        return 'Weak Password'
+        return 'Your Password is Weak.\n\n You should use a combination of letters, numbers and symbols to make your password more secure.'
     if strengh==1:
-        return 'Average Password'
+        return 'Your Password is Average.\n\n You should use a combination of letters, numbers and symbols to make your password more secure.'
     if strengh==2:
-        return 'Strong Password'
+        return 'Your Password is Strong.'
 
 def api(pwned):
 	count = api_check(pwned)
@@ -54,7 +54,7 @@ def api(pwned):
 
 def main():
     """Password Analyzer"""
-    activities = ["Check Password Strength","Password Generator", "Password Guidelines"]
+    activities = ["Check Password Strength","Password Generator", "Password Compliance"]
     
     choice = st.sidebar.selectbox("Select Activity",activities)
 
@@ -77,8 +77,8 @@ def main():
             custom_password = gen_password(number)
             st.write(custom_password)
 
-    elif choice == "Password Guidelines":
-        st.subheader("NIST Password Policy")
+    elif choice == "Password Compliance":
+        st.subheader("NIST Password Guidelines")
         filename = "NIST.txt"
         with open(filename, "r") as file:
             i = 1
