@@ -36,12 +36,13 @@ def password_strength_check(input,vectorizer,model):
     y_pred=model.predict(X_predict)
     strengh=y_pred[0]
     if strengh==0:
-        return 'Your Password is Weak.\n\n You should use a combination of letters, numbers and symbols to make your password more secure.'
+        return st.error('**Your Password is Weak.**\n\n **You should use a combination of letters, numbers and symbols to make your password more secure.**')
     if strengh==1:
-        return 'Your Password is Average.\n\n You should use a combination of letters, numbers and symbols to make your password more secure.'
+        return st.warning('Your Password is Average.\n\n You should use a combination of letters, numbers and symbols to make your password more secure.')
     if strengh==2:
-        return 'Your Password is Strong.'
-
+        st.balloons()
+        return st.success('Your Password is Strong.')
+    
 def api(pwned):
 	count = api_check(pwned)
 	if count:
@@ -65,7 +66,7 @@ def main():
         if st.button("Check"):
             vectorizer=load_vectorizer()
             model=load_model()
-            st.write(password_strength_check(password,vectorizer,model))
+            password_strength_check(password,vectorizer,model)
 
             api(password)
 
