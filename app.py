@@ -16,6 +16,18 @@ def gen_password(size):
 def word_to_char(word):
     return list(word)
 
+def password_compliance():
+    st.write("\n")
+    st.subheader("NIST Password Guidelines")
+    filename = "NIST.txt"
+    with open(filename, "r") as file:
+        i = 1
+        for line in file:
+            line = line.strip()
+            if line:
+                st.write(f"{i}. {line}")
+                i += 1
+
 def load_vectorizer():
     #Loading vectorizer from pickle file
     file = open("tfidf_password_strength.pickle",'rb')
@@ -51,24 +63,24 @@ def api(pwned):
 	else:
 		st.markdown(f'<font color=‘089e00’ size=5>Your password is secure</font>', unsafe_allow_html=True)
 		st.markdown(f"<font color=‘089e00’ size=3>This password wasn't found in any of the compromised Passwords loaded into Have I Been Pwned Database.</font>", unsafe_allow_html=True)
-	return 
+	return
 
 def main():
     """Password Analyzer"""
-    activities = ["Check Password Strength","Password Generator", "Password Compliance"]
-    
+    activities = ["Check Password Strength","Password Generator"]
     choice = st.sidebar.selectbox("Select Activity",activities)
 
     if choice == "Check Password Strength":
         st.title("Password Strength Analyzer")
         st.subheader("Test Your Password Strength")
         password = st.text_input("Enter Password",type="password")
+        st.write("\n")
         if st.button("Check"):
             vectorizer=load_vectorizer()
             model=load_model()
             password_strength_check(password,vectorizer,model)
-
             api(password)
+        password_compliance()
 
     elif choice == "Password Generator":
         st.subheader("Generate Random Password")
@@ -77,17 +89,6 @@ def main():
         if st.button("Generate"):
             custom_password = gen_password(number)
             st.write(custom_password)
-
-    elif choice == "Password Compliance":
-        st.subheader("NIST Password Guidelines")
-        filename = "NIST.txt"
-        with open(filename, "r") as file:
-            i = 1
-            for line in file:
-                line = line.strip()
-                if line:
-                    st.write(f"{i}. {line}")
-                    i += 1
         
 if __name__ == '__main__':
     main()
