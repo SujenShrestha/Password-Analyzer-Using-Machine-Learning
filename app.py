@@ -47,13 +47,13 @@ def password_strength_check(input,vectorizer,model):
     X_predict=vectorizer.transform(X_password)
     y_pred=model.predict(X_predict)
     strengh=y_pred[0]
+    st.write('\n\n')
     if strengh==0:
-        return st.error('**Your Password is Weak.**\n\n **You should use a combination of letters, numbers and symbols to make your password more secure.**')
+        return st.error('**Your Password is Weak.** \n\n **A strong password consists of a combination of letters, numbers and symbols.** \n\n **An example of a strong password would be P@$sw0rd&1.** \n\n **In the example, the password consists of a combination of different characters which makes it difficult to be guessed or cracked by hackers.**')
     if strengh==1:
-        return st.warning('Your Password is Average.\n\n You should use a combination of letters, numbers and symbols to make your password more secure.')
+        return st.warning('**Your Password is Average.** \n\n **A strong password consists of a combination of letters, numbers and symbols.** \n\n **An example of a strong password would be P@$sw0rd&1.** \n\n **In the example, the password consists of a combination of different characters which makes it difficult to be guessed or cracked by hackers.**')
     if strengh==2:
-        st.balloons()
-        return st.success('Your Password is Strong.')
+        return st.success('**Your Password is Strong.**')
     
 def api(pwned):
 	count = api_check(pwned)
@@ -74,7 +74,7 @@ def main():
         st.title("Password Strength Analyzer")
         st.subheader("Test Your Password Strength")
         password = st.text_input("Enter Password",type="password")
-        st.write("\n")
+        st.write("\n\n")
         if st.button("Check"):
             vectorizer=load_vectorizer()
             model=load_model()
