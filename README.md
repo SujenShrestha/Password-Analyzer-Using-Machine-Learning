@@ -1,4 +1,4 @@
-# How to install in your local machine:
+# How to run the application in your local machine:
 
 ### Use a text editor like VSCode
 
