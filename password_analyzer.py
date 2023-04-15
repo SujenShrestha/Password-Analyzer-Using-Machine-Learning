@@ -1,10 +1,6 @@
 import numpy as np
 import pickle
 
-# Convert a given word (string) to a list of individual characters
-def word_to_char(word):
-    return list(word)
-
 # Load the pre-trained vectorizer from a pickle file
 def load_vectorizer():
     with open("tfidf_password_strength.pickle", 'rb') as file:

@@ -20,7 +20,7 @@ def main():
         st.title("Password Strength Analyzer")
         st.subheader("Test Your Password Strength")
 
-        # Get the user's input for the password
+        # Get the user's input for the password 
         password = st.text_input("Enter Password", type="password")
         st.write("\n\n")
 
