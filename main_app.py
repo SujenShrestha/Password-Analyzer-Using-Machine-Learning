@@ -4,6 +4,9 @@ from api_check import check_password_api
 from nist_compliance import display_password_compliance
 from password_generator import generate_password
 
+# Display Titlr of the Webpage
+st.set_page_config(page_title="Password Analyzer")
+
 # Convert a given word (string) to a list of individual characters
 def word_to_char(word):
     return list(word)
