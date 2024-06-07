@@ -70,7 +70,7 @@ pytz-deprecation-shim==0.1.0.post0
 #pywinpty==1.1.6
 pyzmq==22.3.0
 requests==2.26.0
-scikit-learn==1.0.1
+scikit-learn==1.5.0
 scipy==1.7.2
 Send2Trash==1.8.0
 six==1.15.0
@@ -83,7 +83,7 @@ testpath==0.5.0
 threadpoolctl==3.0.0
 toml==0.10.1
 toolz==0.11.2
-tornado==6.1
+tornado==6.4.1
 traitlets==5.1.1
 typing_extensions
 tzdata==2021.5
